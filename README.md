@@ -5,7 +5,7 @@ bbp_docker: These codes create and run a dockerized version of the python3 versi
 
 The git retrieval command for the starting branch of BBP:
 <pre>
-  git clone -b 19.8.0-python --single-branch https://github.com/SCECcode/bbp.git
+  git clone -b 19.8.0-python3 --single-branch https://github.com/SCECcode/bbp.git
 </pre>
 
 ## Install inputs
