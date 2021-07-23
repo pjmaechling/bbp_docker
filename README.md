@@ -4,7 +4,9 @@ tools for evaluating a dockerized version of the SCEC Broadband Platform
 bbp_docker: These codes create and run a dockerized version of the python3 version.
 
 The git retrieval command for the starting branch of BBP:
+<pre>
   git clone -b 19.8.0-python --single-branch https://github.com/SCECcode/bbp.git
+</pre>
 
 ## Install inputs
 See the wiki page to see list of inputs to bbp install.
