@@ -3,17 +3,34 @@ tools for evaluating a dockerized version of the SCEC Broadband Platform
 
 bbp_docker: These codes create and run a dockerized version of the python3 version.
 
+## Host root
+On a mac start at:
+/Users/maechlin
+
+## retrieve this repo of bbp docker tools
+git clone https://github.com/pjmaechling/bbp_docker.git
+
+## retrieve the desired version of the bbp platform
+cd into /Users/maechlin/bbp_docker
+
 The git retrieval command for the starting branch of BBP:
 <pre>
   git clone -b 19.8.0-python3 --single-branch https://github.com/SCECcode/bbp.git
 </pre>
 
 ## Install inputs
+This repo contains a file setup_inputs.txt.
+This is a list of inputs to the bbp install script.
 See the wiki page to see list of inputs to bbp install.
 https://github.com/pjmaechling/bbp_docker/wiki
 
-## Usage Model
+Currently, this is redirected as standardinput to the bbp installation script.
 
+## build.sh script
+The docker file is converted to a docker image when this file is run
+
+
+## Usage Model
 User starts docker on their computer
 User start bbp_19_8 container on their computer
 In the directory where they started the container, they will use a subdirectory call /target.
