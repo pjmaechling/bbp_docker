@@ -12,20 +12,22 @@ LABEL "maintainer"="Philip Maechling <maechlin@usc.edu>" "appname"="bbp"
 #export PYTHONPATH=$BBP_DIR/comps:$PYTHONPATH
 
 
-ENV BBP_DIR=/app/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/bbp_data
-ENV PYTHONPATH=/app/bbp
-ENV PATH="/app/bbp/bin:${PATH}"
+ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/bbp_data
+ENV PYTHONPATH=/app/bbp/bbp/comps
+ENV PATH="/app/bbp/bbp/comps:/app/bbp/bbp/utils/batch:${PATH}"
 #
 RUN yum install -y make autoconf automake autotools-dev libtool gzip bzip2 gcc gcc-gfortran gcc-c++ which python3
 #
 WORKDIR /app
-COPY ucvm/ ./src
-# An external script has posted the correct .gz model file in the largefiles dir
-# Install largefiles
-WORKDIR /app/src/largefiles
-RUN ./stage_large_files.py
-WORKDIR /app/src
+COPY bbp/ ./bbp
+# Run the bbp install script
+# The setup_inputs is a list of command line prompts for region
+# This setup is configured and saved in the git repo.
+# To start, the config says yes to install all regions, but could be minimized later
+WORKDIR /app/bbp/setup
 COPY setup_inputs.txt ./setup_inputs.txt
+RUN ./easy_install_bbp_19.4.0.sh < setup_inputs.txt
+WORKDIR /app/src
 RUN ./ucvm_setup.py -a -d < setup_inputs.txt
 #
 # Remove the src directories to save space
