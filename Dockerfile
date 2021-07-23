@@ -5,12 +5,6 @@ LABEL "maintainer"="Philip Maechling <maechlin@usc.edu>" "appname"="bbp"
 #
 # Setup path for installation of ucvm into /app/bin
 #
-#export BBP_DIR=/Users/maechlin/Documents/dev/bbp_2016/16.5.0/bbp
-#export BBP_GF_DIR=/Users/maechlin/Documents/dev/bbp_2016/bbp_gf
-#export BBP_VAL_DIR=/Users/maechlin/Documents/dev/bbp_2016/bbp_val
-#export BBP_DATA_DIR=/Users/maechlin/Documents/dev/bbp_2016/bbp_data
-#export PYTHONPATH=$BBP_DIR/comps:$PYTHONPATH
-
 
 ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/bbp_data
 ENV PYTHONPATH=/app/bbp/bbp/comps
@@ -50,17 +44,6 @@ COPY basic_query.txt ./basic_query.txt
 WORKDIR /app/target
 COPY test_latlons.txt ./test_latlons.txt
 COPY basic_query.txt ./basic_query.txt
-#
-#
-# Load the ucvm_plotting library
-#
-#WORKDIR /app/src
-#COPY ucvm_plotting ./plotting
-#WORKDIR /app/src/plotting
-#RUN yum install -y python-matplotlib
-#RUN yum install -y python-basemap
-#RUN yum install -y basemap-data-hires.noarch
-#RUN ./unpack-dist
 #
 # start as command line terminal
 #
