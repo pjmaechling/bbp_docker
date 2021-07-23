@@ -6,10 +6,14 @@ bbp_docker: These codes create and run a dockerized version of the python3 versi
 The git retrieval command for the starting branch of BBP:
 git clone -b 19.8.0-python --single-branch https://github.com/SCECcode/bbp.git
 
+## Install inputs
+See the wiki page to see list of inputs to bbp install.
+https://github.com/pjmaechling/bbp_docker/wiki
+
 ## Usage Model
 
 User starts docker on their computer
-User start ucvm_xxxx container on their computer
+User start bbp_19_8 container on their computer
 In the directory where they started the container, they will use a subdirectory call /target.
 The container will read input files, and write results to this directory
 $cd /app/target
