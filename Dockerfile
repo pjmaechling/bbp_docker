@@ -8,11 +8,11 @@ LABEL "maintainer"="Philip Maechling <maechlin@usc.edu>" "appname"="bbp"
 # Also assume the user treats the /app/target directory as their working directory
 #
 
-ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/target BASEBBP=/app/bbp/bbp SRCDIR=/app/bbp/src MD5FILE=/app/bbp/setup/bbp-19.4.0-md5.txt
+ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/target BASEBBP=/app/bbp/bbp BBPDIR=/app/bbp SRCDIR=/app/bbp/src MD5FILE=/app/bbp/setup/bbp-19.4.0-md5.txt
 ENV PYTHONPATH=/app/bbp/bbp/comps
 ENV PATH="/app/bbp/bbp/comps:/app/bbp/bbp/utils/batch:${PATH}"
 #
-RUN yum install -y make autoconf automake autotools-dev libtool gzip bzip2 gcc gcc-gfortran gcc-c++ which python3
+RUN yum install -y make util-linux curl autoconf automake autotools-dev libtool gzip bzip2 gcc gcc-gfortran gcc-c++ which python3
 #
 WORKDIR /app
 COPY bbp/ ./bbp
