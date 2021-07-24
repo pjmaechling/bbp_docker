@@ -1,3 +1,9 @@
+# Docker git repos
+<https://github.com/sceccode/ucvm_docker/wiki>
+<https://github.com/pjmaechling/ucvm_docker>
+<https://github.com/pjmaechling/bbp_docker>
+<https://github.com/pjmaechling/bbp_docker/wiki>
+
 # bbp_docker
 tools for evaluating a dockerized version of the SCEC Broadband Platform
 
@@ -36,19 +42,19 @@ User start bbp_19_8 container on their computer
 In the directory where they started the container, they will use a subdirectory call /target.
 The container will read input files, and write results to this directory
 $cd /app/target
-$ucvm_query -f /app/ucvm/conf/ucvm.conf -m cvmh < /app/test_latlons.txt
+$run_bbp.py
 
-Potential Benefits
+## Potential Benefits
 
 No installation needed Portable to other computers Progrm requires less space Users could retreieve use remove programs
 Potential Limitations
 
 Users must be comfortable running ucvm from a command line interface. This over means they are creating output files, and extracting selected information for plotting.
 Users must work within limits of images and local computers. There are some size ucvm problems that won't run on their laptops, so we need to warn people what the limits are.
-UCVM is used on supercomputers, for example, to build simulation meshes. The docker version of UCVM may not work for this purpose. There may be a query limit on number of inputs points that an image can query.
+
 
 ## Run Cmd:
-docker run --rm -it --mount type=bind,source="$(pwd)"/target,destination=/app/target  sceccode/ucvm_:MMDDHHMM
+docker run --rm -it --mount type=bind,source="$(pwd)"/target,destination=/app/target  sceccode/bbp_docker:MMDDHHMM
 
 This is a coding and configuration test for creating a UCVM docker image that can be run on AWS.
 
@@ -56,12 +62,15 @@ This is a coding and configuration test for creating a UCVM docker image that ca
 There is a .dockerignore file that defines which files not to include in the image. The Dockerfile and this README.md are excluded.
 
 ## Build Docker images for Nine SCEC CVMs
-The top level script is: build_all.sh which invokes docker build 9 times, one for each model that we distribution in a docker image.
-This script moves the model .gz file into the largefiles directory, then runs the build.
+The top level script is: build_all.sh which invokes docker build 1 time.
 
 ## Dockerfile
 This lists the steps needed to build the container. It starts with a amazonlinux base image, add compilers and python.
 
-It copies the ucvm git repo from the build computer into the image, and then invokes the build process. The build process runs, installs results in a directory: /app/ucvm
+It copies the ucvm git repo from the build computer into the image, and then invokes the build process. The build process runs, installs results in a directory: /app/bbp
 
-As the docker build concludes, the Dockerfile commands removed the source files, leaving only the binary files and the model files for the selected model.
+## Mount data input output directories
+On host system, user invokes docker run. Expectation is that there is a subdirectory call ./target
+./target is mounted as /app/bbp_data.
+Input files can be stored there.
+Output results will be written there
