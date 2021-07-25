@@ -17,6 +17,7 @@ RUN yum -y install yum-utils
 RUN yum -y groupinstall "Development Tools"
 # this includes autoconf automake, gcc gcc-c++ make libtool
 RUN yum install -y util-linux pip curl which autotools-dev gzip bzip2 gcc-gfortran
+RUN yum install -y fftw-devel
 RUN yum -y install python3
 RUN yum -y install python3-pip
 RUN pip install -U pip
