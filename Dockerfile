@@ -12,7 +12,14 @@ ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DAT
 ENV PYTHONPATH=/app/bbp/bbp/comps
 ENV PATH="/app/bbp/bbp/comps:/app/bbp/bbp/utils/batch:${PATH}"
 #
-RUN yum install -y make util-linux curl autoconf automake autotools-dev libtool gzip bzip2 gcc gcc-gfortran gcc-c++ which python3
+RUN yum -y update
+RUN yum -y install yum-utils
+RUN yum -y groupinstall "Development Tools"
+RUN yum install -y util-linux pip curl which autoconf automake autotools-dev libtool gzip bzip2 gcc-gfortran gcc-c++
+RUN yum -y install python3
+RUN yum -y install python3-pip
+RUN pip install -U pip
+RUN pip install numpy scipy pyproj matplotlib
 #
 WORKDIR /app
 COPY bbp/ ./bbp
