@@ -28,7 +28,7 @@ COPY bbp/ ./bbp
 # The setup_inputs is a list of command line prompts for region
 # This setup is configured and saved in the git repo.
 # To start, the config says yes to install all regions, but could be minimized later
-WORKDIR /app/bbp/bbp/setup
+WORKDIR /app/bbp/setup
 COPY setup_inputs.txt ./setup_inputs.txt
 RUN ./easy_install_bbp_19.4.0.sh < setup_inputs.txt
 #
