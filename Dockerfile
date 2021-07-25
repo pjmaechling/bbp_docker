@@ -8,14 +8,15 @@ LABEL "maintainer"="Philip Maechling <maechlin@usc.edu>" "appname"="bbp"
 # Also assume the user treats the /app/target directory as their working directory
 #
 
-ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/target BASEBBP=/app/bbp/bbp BBPDIR=/app/bbp SRCDIR=/app/bbp/src MD5FILE=/app/bbp/setup/bbp-19.4.0-md5.txt
+ENV BBP_DIR=/app/bbp/bbp BBP_GF_DIR=/app/bbp_gf BBP_VAL_DIR=/app/bbp_val BBP_DATA_DIR=/app/target BASEBBP=/app/bbp/bbp BBPDIR=/app/bbp SRCDIR=/app/bbp/bbp/src MD5FILE=/app/bbp/setup/bbp-19.4.0-md5.txt
 ENV PYTHONPATH=/app/bbp/bbp/comps
 ENV PATH="/app/bbp/bbp/comps:/app/bbp/bbp/utils/batch:${PATH}"
 #
-RUN yum -y update
+RUN yum -y update 
 RUN yum -y install yum-utils
 RUN yum -y groupinstall "Development Tools"
-RUN yum install -y util-linux pip curl which autoconf automake autotools-dev libtool gzip bzip2 gcc-gfortran gcc-c++
+# this includes autoconf automake, gcc gcc-c++ make libtool
+RUN yum install -y util-linux pip curl which autotools-dev gzip bzip2 gcc-gfortran
 RUN yum -y install python3
 RUN yum -y install python3-pip
 RUN pip install -U pip
@@ -27,7 +28,7 @@ COPY bbp/ ./bbp
 # The setup_inputs is a list of command line prompts for region
 # This setup is configured and saved in the git repo.
 # To start, the config says yes to install all regions, but could be minimized later
-WORKDIR /app/bbp/setup
+WORKDIR /app/bbp/bbp/setup
 COPY setup_inputs.txt ./setup_inputs.txt
 RUN ./easy_install_bbp_19.4.0.sh < setup_inputs.txt
 #
