@@ -14,9 +14,8 @@ ENV PATH="/home/bbp/anaconda3/bin:/app/bbp/bbp/comps:/app/bbp/bbp/utils/batch:${
 RUN yum -y update 
 RUN yum -y install yum-utils
 RUN yum -y groupinstall "Development Tools"
-# this includes autoconf automake, gcc gcc-c++ make libtool
-RUN yum install -y util-linux pip curl which autotools-dev gzip bzip2 gcc-gfortran
-RUN yum install -y fftw-devel
+# the groupinstall includes autoconf automake, gcc gcc-c++ make libtool
+RUN yum -y install -y util-linux gcc-gfortran fftw-devel
 
 # Setup owners
 RUN groupadd scec
@@ -25,27 +24,28 @@ USER bbp
 
 #Install python3
 WORKDIR /home/bbp
-COPY anaconda_inputs.txt ./anaconda_inputs.txt
-RUN curl -O https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
+COPY --chown=bbp:scec Anaconda3-2021.05-Linux-x86_64.sh ./Anaconda3-2021.05-Linux-x86_64.sh
+COPY --chown=bbp:scec anaconda_inputs.txt ./anaconda_inputs.txt
 RUN bash Anaconda3-2021.05-Linux-x86_64.sh < anaconda_inputs.txt
-#RUN rm /home/bbp/Anaconda3-2021.05-Linux-x86_64.sh
-#RUN conda install -c anaconda pyproj
+RUN rm /home/bbp/Anaconda3-2021.05-Linux-x86_64.sh
+RUN conda install -c anaconda pyproj
 #
 WORKDIR /app
-COPY bbp/ ./bbp
+COPY --chown=bbp:scec bbp/ ./bbp
 # Run the bbp install script
 # The setup_inputs is a list of command line prompts for region
 # This setup is configured and saved in the git repo.
 # To start, the config says yes to install all regions, but could be minimized later
-#WORKDIR /app/bbp/setup
-#COPY setup_inputs.txt ./setup_inputs.txt
-#RUN ./easy_install_bbp_19.4.0.sh < setup_inputs.txt
+WORKDIR /app/bbp/bbp_gf
+COPY --chown=bbp:scec labasin500-velocity-model-19.4.0.tar.gz ./labasin500-velocity-model-19.4.0.tar.gz
+WORKDIR /app/bbp/setup
+COPY --chown=bbp:scec setup_inputs.txt ./setup_inputs.txt
+RUN ./easy_install_bbp_19.4.0.sh < setup_inputs.txt
 #
 # Define file input/output mounted disk
 #
 VOLUME /app/target
 WORKDIR /app/target
-COPY /home/bbp/Anaconda3-2021.05-Linux-x86_64.sh ./Anaconda3-2021.05-Linux-x86_64.sh
 #
 #
 # Add metadata to dockerfile using labels
