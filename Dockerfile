@@ -66,6 +66,13 @@ RUN /app/bbp/setup/easy_install_bbp_19.4.0.sh < setup_inputs.txt
 VOLUME /app/target
 WORKDIR /app/target
 #
+# Define ENV variables
+#
+ENV BBP_DIR=/app/bbp/bbp
+ENV BBP_GF_DIR=/app/bbp/bbp_gf
+ENV BBP_VAL_DIR=/app/bbp/bbp_val
+ENV BBP_DATA_DIR=/app/target
+#
 #
 # Add metadata to dockerfile using labels
 LABEL "org.scec.project"="SCEC Broadband Platform"
