@@ -1,8 +1,11 @@
 # Docker git repos
-*[UCVM Docker Wiki](https://github.com/sceccode/ucvm_docker/wiki)
-*[UCVM Docker README.md](https://github.com/pjmaechling/ucvm_docker)
-*[BBP Docker](https://github.com/pjmaechling/bbp_docker)
-*[BBP Docker Wiki](https://github.com/pjmaechling/bbp_docker/wiki)
+1.[UCVM Docker Wiki](https://github.com/sceccode/ucvm_docker/wiki)
+
+2.[UCVM Docker README.md](https://github.com/pjmaechling/ucvm_docker)
+
+3.[BBP Docker](https://github.com/pjmaechling/bbp_docker)
+
+4.[BBP Docker Wiki](https://github.com/pjmaechling/bbp_docker/wiki)
 
 # bbp_docker
 tools for evaluating a dockerized version of the SCEC Broadband Platform
